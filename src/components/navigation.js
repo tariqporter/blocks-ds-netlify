@@ -5,7 +5,7 @@ const Tabs = require('blocks-react').Tabs.Tabs;
 
 const Navigation = (props) => {
   const {
-    navigation
+    navigation = []
   } = props;
   
   return (
