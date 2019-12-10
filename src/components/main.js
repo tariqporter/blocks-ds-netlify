@@ -1,8 +1,8 @@
 import React from "react"
 
-import DocsIcon from "../../../../projects/blocks-docs-netlify/src/components/svgs/docs-icon"
-import TalksIcon from "../../../../projects/blocks-docs-netlify/src/components/svgs/talks-icon"
-import ToolboxIcon from "../../../../projects/blocks-docs-netlify/src/components/svgs/toolbox-icon"
+import DocsIcon from "./svgs/docs-icon"
+import TalksIcon from "./svgs/talks-icon"
+import ToolboxIcon from "./svgs/toolbox-icon"
 
 const MainContent = () => (
   <section className="design-page-section">
