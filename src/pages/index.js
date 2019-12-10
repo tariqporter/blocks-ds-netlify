@@ -1,4 +1,5 @@
 import React from 'react';
+import { graphql } from "gatsby";
 import { Location } from '@reach/router';
 import Layout from '../components/layout';
 import MainContent from '../components/main';
