@@ -1,19 +1,43 @@
-import React from "react"
+import React from 'react';
+import { Location } from '@reach/router';
+import Layout from '../components/layout';
+import MainContent from '../components/main';
 
-const IndexPage = () => {
-  const [frontmatter] = React.useState({ title: '', date: '' });
+const IndexPage = (props) => {
+  const {
+    data
+  } = props;
+  const navigation = data.allIndexJson.edges.map(edge => ({ ...edge.node, selected: edge.node.subsections[0].name }));
 
   return (
-    <div className="blog-post-container">
-      <div className="blog-post">
-        <h1>{frontmatter.title}</h1>
-        <h2>{frontmatter.date}</h2>
-        <div className="blog-post-content">
-          Hello
-        </div>
-      </div>
-    </div>
+    <Location>
+      {({ location }) => (
+        <Layout navigation={navigation} location={location}>
+          <div className="blocks-hero">
+            <h1>Blocks Design System</h1>
+          </div>
+          <MainContent />
+        </Layout>
+      )}
+    </Location>
   );
-}
+};
 
-export default IndexPage
+export const pageQuery = graphql`
+  query {
+    allIndexJson {
+      edges {
+        node {
+          id
+          name
+          subsections {
+            href
+            name
+          }
+        }
+      }
+    }
+  }
+`;
+
+export default IndexPage;

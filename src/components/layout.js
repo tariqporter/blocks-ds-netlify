@@ -1,52 +1,43 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import Helmet from "react-helmet"
 
-import Header from "./header"
-import "./layout.css"
+import favicon from '../../favicon.png';
+import Navigation from './navigation';
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
+const Layout = (props) => {
+  const {
+    children,
+    navigation,
+    location
+  } = props;
 
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0px 1.0875rem 1.45rem`,
-          paddingTop: 0,
-        }}
-      >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
+    <div className="l-root">
+      <Helmet
+        meta={[
+          { name: 'description', content: 'CBRE Build\'s Blocks design system.' }
+        ]}
+        link={[
+          { rel: 'shortcut icon', type: 'image/png', href: `${favicon}` }
+        ]}
+        title="Blocks by CBRE Build"
+      />
+      <a href="#mainContent" className="skip-link blx-button">Skip to main content</a>
+      <div className="l-flex-horizontal l-page">
+        <Navigation navigation={navigation} location={location} />
+        <div className="design-page">
+          <main id="mainContent" tabIndex="-1" className="design-page-content">
+            {children}
+          </main>
+        </div>
       </div>
-    </>
-  )
-}
+    </div>
+  );
+};
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node
 }
 
-export default Layout
+export default Layout;
